@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: travelwise-api
+    runtime: docker
+    dockerfilePath: ./deploy/api.Dockerfile
+    envVars:
+      - key: ASPNETCORE_URLS
+        value: http://0.0.0.0:10000
+      - key: ConnectionStrings__Supabase
+        sync: false
+      - key: AI_SERVICE_URL
+        sync: false
+      - key: Supabase__Url
+        value: https://fhnttrinouhhkjmmvydr.supabase.co
+  - type: web
+    name: travelwise-ai
+    runtime: docker
+    dockerfilePath: ./deploy/ai.Dockerfile
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: AI_REQUIRE_GEMINI
+        value: "true"
